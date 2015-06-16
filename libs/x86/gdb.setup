@@ -1,0 +1,6 @@
+set solib-search-path /Users/zach/android/of_v0.8.4_android_release/apps/3d/accelDraw//obj/local/x86:/Users/zach/android/of_v0.8.4_android_release/apps/3d/accelDraw//libs/x86
+directory /Users/zach/android/android-ndk-r9b/platforms/android-17/arch-arm/usr/include
+directory /Users/zach/android/of_v0.8.4_android_release/apps/3d/accelDraw//src
+directory /Users/zach/android/android-ndk-r9b/sources/cxx-stl/system
+directory /Users/zach/android/of_v0.8.4_android_release/apps/3d/accelDraw//libs/x86
+
