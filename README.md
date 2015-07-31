@@ -8,7 +8,7 @@ As an artist I'm constantly thinking about new types of drawing tools, and what 
 
 ## credits
  
-This project owes a great deal to Amit Pitaru's Rhonda, which I helped make native apps for, and to Matt Deslaurier's article ["drawing lines is hard"](http://mattdesl.svbtle.com/drawing-lines-is-hard). I'd also like to thank Anthony Tripaldi for some android info and Arturo Castro (as well as the broader openframeworks community).  The app is written in OF 0.8.4.
+This project owes a great deal to Amit Pitaru's Rhonda, which I helped make native apps for, and to Matt Deslaurier's article ["drawing lines is hard"](http://mattdesl.svbtle.com/drawing-lines-is-hard). I'd also like to thank Anthony Tripaldi for some android info and Arturo Castro (as well as the broader openframeworks community).  The app is written in openFrameworks 0.8.4.
 
 # technical details
 
