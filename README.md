@@ -2,7 +2,7 @@
 
 ink space is a experimental drawing tool which uses the accelerometer on your android device to move the drawings you make in 3d.  It's part of the android experiments initiative. 
 
-The project itself it fairly straight forward you can draw, move the phone by tilting in different directions, adjust line that you are drawing, create an animted line which pulses and re-draws itself and record an animated gif of whatever you make. 
+The project itself it fairly straight forward you can draw, move the phone by tilting in different directions, adjust line that you are drawing, create an animted line which pulses and re-draws itself and record an animated gif of whatever you make.   Double-tapping (or hitting the trash icon in the menu) clears the app.
 
 As an artist I'm constantly thinking about new types of drawing tools, and what does drawing in the 21st century look like. 
 
