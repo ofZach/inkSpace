@@ -21,7 +21,7 @@ It can save gifs (using the excellent [ofxGifEncoder](https://github.com/jesusgo
 
 ## credits
  
-This project owes a great deal to Amit Pitaru's Rhonda, later versions of which I helped with, and to Matt Deslaurier's article ["drawing lines is hard"](http://mattdesl.svbtle.com/drawing-lines-is-hard). I'd also like to thank Anthony Tripaldi for android debugging and Arturo Castro (as well as the broader openframeworks community).  Also thanks to the folks from google creative lab for asking me to make something!  The app is written in openFrameworks 0.8.4.
+This project owes a great deal to Amit Pitaru's [Rhonda](http://rhondaforever.com/), later versions of which I helped with, and to Matt Deslaurier's article ["drawing lines is hard"](http://mattdesl.svbtle.com/drawing-lines-is-hard). I'd also like to thank Anthony Tripaldi for android debugging and Arturo Castro (as well as the broader openframeworks community).  Also thanks to the folks from google creative lab for asking me to make something!  The app is written in openFrameworks 0.8.4.
 
 # technical details
 
