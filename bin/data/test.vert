@@ -18,10 +18,7 @@ varying float endPct;
 
 
 void main() {
-    
-
-    
-    
+   
   vec2 aspectVec = vec2(aspect, 1.0);
   mat4 projViewModel = projection * modelview ;
   vec4 previousProjected = projViewModel * vec4(previous, 1.0);
@@ -36,7 +33,6 @@ void main() {
        scalar = ( 1.0 - abs(ptNonProjected.z - focusPoint) / 400.0);
        if (scalar < 0.5) scalar = 0.5;
    }
-    
     
   vec2 previousScreen = previousProjected.xy / previousProjected.w * aspectVec;
   vec2 nextScreen = nextProjected.xy / nextProjected.w * aspectVec;

@@ -13,19 +13,25 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import cc.openframeworks.OFAndroid;
 import android.util.Log;
 
 public class OFActivity extends cc.openframeworks.OFActivity{
+
+	
+	
 
 	
 	private static Context context;
@@ -52,6 +58,9 @@ public class OFActivity extends cc.openframeworks.OFActivity{
 		    return false;
 		  }
 		
+	
+	
+	
 	
 	public static void sayHi(String msg){  
 		
@@ -85,29 +94,52 @@ public class OFActivity extends cc.openframeworks.OFActivity{
 			e.printStackTrace();
 		}
 		  
-		  scanPhoto(imageFileName.toString());
+		  String[] files = new String[1];
+		  files[0] = imageFileName.toString();
+		  scanMedia(files);
+		  
+		  //scanPhoto(imageFileName.toString());
 	
 		  //Log.d("???", imageFileName.toString());
 		
 		  
-		  Intent intent = new Intent();
-		  intent.setAction(Intent.ACTION_VIEW);
-		  intent.setDataAndType(Uri.parse("file://" + imageFileName.toString()), "image/*");
+		  Intent intent = getShareIntent(imageFileName.toString(),"made with ink space");
 		  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		  context.startActivity(intent);
 		  
-		//context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
-		
-		//Intent i = new Intent(
-			//	Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-				 
-		//context.startActivityForResult(i, RESULT_LOAD_IMAGE);
-		
-	   
-//		Log.d("d","wha???");
-//		Log.d("d",msg);
-//		Log.d("d","ha!!");
 	}
+	
+	public static Intent getShareIntent(String path, String caption)
+    {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("image/*");
+ 
+        //add the file uri
+        Uri uri = Uri.parse("file://" + path);
+        share.putExtra(Intent.EXTRA_STREAM, uri);
+ 
+        //add caption if present
+        if(caption != "")
+            share.putExtra(Intent.EXTRA_TEXT, caption);
+ 
+        return share;
+    }
+	
+	
+	 private static void scanMedia(String[] files)
+	    {
+	        MediaScannerConnection.scanFile(
+	        		context,
+	                files,
+	                null,
+	                new MediaScannerConnection.OnScanCompletedListener() {
+	                    @Override
+	                    public void onScanCompleted(String path, Uri uri) {
+	                        Log.d("file", "file " + path + " was scanned successfully: " + uri);
+	                    }
+	                }
+	        );
+	    }
 	
 	private static void scanPhoto(String imageFileName)
 	{
@@ -128,6 +160,15 @@ public class OFActivity extends cc.openframeworks.OFActivity{
         ofApp = new OFAndroid(packageName,this);
         
         context = getApplicationContext();
+        
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        
 		
     }
 	
@@ -144,7 +185,16 @@ public class OFActivity extends cc.openframeworks.OFActivity{
     @Override
     protected void onResume() {
         super.onResume();
+        
+        
         ofApp.resume();
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
     
     @Override
