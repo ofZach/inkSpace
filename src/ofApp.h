@@ -7,9 +7,8 @@
 #include "lineUtilities.h"
 #include "ofxGui.h"
 #include "ofxGifEncoder.h"
-
-
-
+#include "menu.h"
+#include "ofxXmlSettings.h"
 
 
 class ofApp : public ofxAndroidApp{
@@ -31,10 +30,16 @@ class ofApp : public ofxAndroidApp{
 		void touchCancelled(int x, int y, int id);
 		void swipe(ofxAndroidSwipeDir swipeDir, int id);
 
+//		void scaleBegin( float scale);
+//		void scale( float scale);
+//		void scaleEnd( float scale);
+
+
 		void pause();
 		void stop();
 		void resume();
 		void reloadTextures();
+		void unloadTextures();
 
 		bool backPressed();
 		void okPressed();
@@ -46,82 +51,110 @@ class ofApp : public ofxAndroidApp{
 		string messages[3];
 		lineWithInfo line;
         vector < lineWithInfo > lines;
-       // rhondaLineRenderer RLR;
-        ofVbo * vbo;
+
+
+        float introScreenEnergy;
+        float introScreenEnergyTarget;
+        vector < lineWithInfo > linesForIntroScreen;
+
+
+        int drawingStartTime;
+        bool bScaling;
+        ofPoint fingerPos[2]; // for scaling!
+        float fingerDiff;
+        float scalePct;
+
+
+
         int nPointsLastFrame;
-        ofShader shader;
+        
 
         int lastNumPts;
 
-        ofImage ink;
-        bool bNeedToReallocateOpengl;
-        int nFramesToReallocate;
+
+        //bool bNeedToReallocateOpengl;
+        //int nFramesToReallocate;
 
         //------------------------------------------ gui
 
     	bool bHide;
     
-        ofParameter < float > accelSmooth;
+        ofParameter < float > accelSmoothing;
         ofParameter < float > rotateAmount;
         ofParameter < float > rotateDamping;
         ofParameter < float > transAmount;
         ofParameter < float > transDamping;
         ofParameter < float > minWidth;
         ofParameter < float > maxWidth;
-    
-    
-//    
-//        // z scaling
-//    
-//    
-//    	ofParameter<float> radius;
-//    	ofParameter<ofColor> color;
-//    	ofParameter<ofVec2f> center;
-//    	ofParameter<int> circleResolution;
-//    	ofParameter<bool> filled;
-//    	ofxButton twoCircles;
-//    	ofxButton ringButton;
-//    	ofParameter<string> screenSize;
+
+
+        ofParameter < float > rotateAmountInfo;
+        ofParameter < float > rotateDampingInfo;
+        ofParameter < float > transAmountInfo;
+        ofParameter < float > transDampingInfo;
+
+
+
     	ofxPanel gui;
 
 
-    	 void onGifSaved(string & fileName);
-    	 bool bGifSaved;
-    	 string gifPath;
+    	void onGifSaved(string & fileName);
+    	bool bGifSaved;
+    	string gifPath;
 
 
+        //---------------------------------------------------------------------------------
+        // images will get reloaded when the app context is destroyed, but I am not sure 
+        // about FBOs, VBOs, and shaders, so I will reallocate them
+    	
+    	ofImage ink;
+    	ofImage grey;
 
-//06-13 06:33:21.320: I/(16068): /storage/emulated/0/Android/data/cc.openframeworks.accelDraw/files/test2015-06-13-06-33-21-313.gif
+        //---------------------------------------------------------------------------------
+        // things to reallocate when the opengl context resumes (when the app is paused, opengl context dissapears)
+        ofVbo * vbo;
+        ofShader * shader;
+        ofFbo * subscreen;
+        ofFbo * wholeScreen;
+        ofTexture * screen;
+
+        int gifWidth;
+        int gifHeight;
+        int lastGifRecordTime;
+        int gifRecordRate;
 
 
-    	ofImage camImg;
-    	ofImage infoImg;
-    	ofImage lightningImg;
-    	ofImage arrowImg;
 
     	bool bLightningMode;
     	bool bRecordingMode;
+    	bool bRecordingProcessing;
     	int recordingStartTime;
+    	float recordPct;
     	bool bInfoMode;
-    	float triPct;
-    	float triangleChangeEnergy;
 
+    	void setupTitle();
+    	void drawTitle();
+    	ofImage title;
+    	vector < ofPoint > titlePts;
 
-    	void handleMenuPress(ofPoint pt, bool bDrag);
+    	void exportDrawingsToFile();
+    	
 
-    	bool bMenuOpen;
-    	float menuOpenPct;
     	bool bIsThisMouseEventInMenu;
-
-
-    	 ofxGifEncoder gifEncoder;
-
+        
+    	ofxGifEncoder gifEncoder;
     	ofPixels subscreenPixels;
-    	ofFbo subscreen;
-    	ofFbo wholeScreen;
-
-    	ofTexture screen;
-    	ofFbo menu;
     	unsigned char * data;
+
+    	bool bPaused;
+
+    	menu menuPanel;
+
+    	ofDirectory infoScreenDir;
+
+    	ofImage experimentImg;
+    	ofImage recordingImg;
+    	ofImage processingImg;
+
 
 };

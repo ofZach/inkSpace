@@ -3,10 +3,8 @@
 
 void lineWithInfo::computeWidths(){
     
-	//widths.clear();
     widthInfo.clear();
-    //
-    
+
     ofApp * appPtr = (ofApp *) ofGetAppPtr();
     float minWidth = appPtr->minWidth;
     float maxWidth = appPtr->maxWidth;
@@ -25,7 +23,6 @@ void lineWithInfo::computeWidths(){
 	avgSpeed /= MAX(1.0, line.size());
     
 	float capLength = 60;
-    
     
     float widthSmooth = minWidth;
     float runningDistance = 0;
@@ -47,7 +44,6 @@ void lineWithInfo::computeWidths(){
         
         
         float widthPct = ofMap(len, 1,50, 0, 1, true);;
-        //cout << widthPct << endl;
         widthSmooth = 0.85f * widthSmooth + 0.15 * ofMap(powf(widthPct, 3.4), 0, 1, minWidth, maxWidth, true);
         
         
@@ -62,14 +58,7 @@ void lineWithInfo::computeWidths(){
         
         runningDistance += len;
         
-        //scalePct = powf(scalePct, 0.3);
-        //cout << scalePct << endl;
-        
-        //widths.push_back(widthSmooth * scalePct);
-        
     }
     
-    //origLine = line;
-
 }
 
