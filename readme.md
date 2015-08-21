@@ -13,7 +13,7 @@ You can see it in action here:
 
 [![app in action](http://j.gifs.com/v1pNx3.gif)](https://www.youtube.com/watch?v=cufd7XnG4A8)
 
-It can save gifs (using the excellent [ofxGifEncoder](https://github.com/jesusgollonet/ofxGifEncode)), like this: 
+It can save gifs (using the excellent [ofxGifEncoder](https://github.com/jesusgollonet/ofxGifEncoder)), like this: 
 
 ![example gif](img/example.gif)
 
