@@ -51,6 +51,7 @@ Here's a couple of tips for working with OF on android:
 * relative to IOS, putting the app on the play store was a piece of cake and putting the app on your devices was also super easy, almost a joy.  I have nightmares thinking of provisioning profiles.
 
 
+this is an (android experiment)[https://www.androidexperiments.com/] 
 
 
 
